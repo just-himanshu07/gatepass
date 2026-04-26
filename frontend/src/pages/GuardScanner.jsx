@@ -27,6 +27,19 @@ const GuardScanner = () => {
     return () => scanner.clear();
   }, []);
 
+  useEffect(() => {
+    // Prime the audio engine on first user interaction to bypass browser auto-play restrictions
+    const primeAudio = () => {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AudioCtx();
+      ctx.resume().then(() => {
+        window.removeEventListener('click', primeAudio);
+      });
+    };
+    window.addEventListener('click', primeAudio);
+    return () => window.removeEventListener('click', primeAudio);
+  }, []);
+
   const playBeep = () => {
     try {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -39,6 +52,11 @@ const GuardScanner = () => {
       gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
       oscillator.start();
       oscillator.stop(audioCtx.currentTime + 0.15);
+      
+      // Some browsers require explicit resume
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
     } catch (e) {
       console.error('Audio play failed', e);
     }
