@@ -139,10 +139,7 @@ const GuardScanner = () => {
 
                       <div className="guard-flex-row" style={{ display: 'flex', gap: '1rem' }}>
                         <div className="flex" style={{ background: 'var(--bg-main)', padding: '1rem', borderRadius: '12px', flex: 1, fontSize: '0.9rem' }}>
-                          <Home size={16} color="var(--primary)" /> {passDetails.student?.hostel} - {passDetails.student?.roomNumber}
-                        </div>
-                        <div className="flex" style={{ background: 'var(--bg-main)', padding: '1rem', borderRadius: '12px', flex: 1, fontSize: '0.9rem' }}>
-                          <Phone size={16} color="var(--primary)" /> {passDetails.student?.phone}
+                          <Phone size={16} color="var(--primary)" /> Student Phone: {passDetails.student?.phone}
                         </div>
                       </div>
 
@@ -155,11 +152,6 @@ const GuardScanner = () => {
                           <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>REASON FOR LEAVING</p>
                           <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>{passDetails.reason}</p>
                         </div>
-                      </div>
-
-                      <div style={{ background: 'var(--bg-main)', padding: '1.5rem', borderRadius: '16px', marginTop: '1rem', borderLeft: '4px solid var(--primary)' }}>
-                        <p style={{ color: 'var(--text-muted)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>PARENT CONTACT ({passDetails.relation})</p>
-                        <p style={{ fontSize: '1.1rem', fontWeight: '700' }}><Phone size={14} /> {passDetails.parentPhone}</p>
                       </div>
                     </div>
 
