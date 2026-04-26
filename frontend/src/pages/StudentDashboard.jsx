@@ -105,7 +105,7 @@ const StudentDashboard = () => {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             className="card"
-            style={{ width: '90%', maxWidth: '600px', padding: '2.5rem' }}
+            style={{ width: '90%', maxWidth: '600px', maxHeight: '90vh', overflowY: 'auto' }}
           >
             <h2 style={{ marginBottom: '0.5rem' }}>Gate Pass Request</h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Please verify your details before submitting</p>
@@ -174,7 +174,7 @@ const StudentDashboard = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className="card"
-            style={{ textAlign: 'center', padding: '3rem', maxWidth: '400px' }}
+            style={{ textAlign: 'center', maxWidth: '400px', width: '90%', maxHeight: '90vh', overflowY: 'auto' }}
             onClick={e => e.stopPropagation()}
           >
             <h2 style={{ marginBottom: '1.5rem' }}>E-Pass Verification</h2>
