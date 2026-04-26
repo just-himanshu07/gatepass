@@ -73,7 +73,7 @@ const StudentDashboard = () => {
               <div style={{ padding: '1.5rem', borderBottom: '1px dashed var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                   <Calendar size={16} color="var(--primary)" />
-                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-muted)' }}>{new Date(pass.createdAt).toLocaleDateString()}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-muted)' }}>{new Date(pass.createdAt).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}</span>
                 </div>
                 <div className={`badge badge-${pass.status}`}>{pass.status}</div>
               </div>
@@ -87,7 +87,7 @@ const StudentDashboard = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginBottom: '1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                     <Clock size={16} />
-                    <span>Departure: <strong>{new Date(pass.departureTime).toLocaleString()}</strong></span>
+                    <span>Departure: <strong>{new Date(pass.departureTime).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })}</strong></span>
                   </div>
                 </div>
 

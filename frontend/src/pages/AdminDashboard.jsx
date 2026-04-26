@@ -247,7 +247,7 @@ const AdminDashboard = () => {
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div className={`badge badge-${req.status}`} style={{ display: 'block', marginBottom: '0.3rem' }}>{req.status}</div>
-                    <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Req: {new Date(req.createdAt).toLocaleString()}</p>
+                    <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Req: {new Date(req.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
                   </div>
                 </div>
 
@@ -274,7 +274,7 @@ const AdminDashboard = () => {
                   </div>
                   <div style={{ padding: '1rem', borderLeft: '4px solid var(--warning)', background: 'var(--bg-main)', borderRadius: '0 8px 8px 0' }}>
                     <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>EXPECTED DEPARTURE</p>
-                    <p style={{ fontWeight: '600' }}>{new Date(req.departureTime).toLocaleString()}</p>
+                    <p style={{ fontWeight: '600' }}>{new Date(req.departureTime).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })}</p>
                   </div>
                 </div>
 

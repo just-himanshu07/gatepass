@@ -98,7 +98,7 @@ exports.verifyPass = async (req, res) => {
       if (diffInMinutes > 30) {
         return res.status(400).json({ 
           message: 'Pass validity error', 
-          error: `This pass is only valid within 30 minutes of the expected departure (${departureTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}).`
+          error: `This pass is only valid within 30 minutes of the expected departure (${departureTime.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute:'2-digit', hour12: true })} IST).`
         });
       }
 

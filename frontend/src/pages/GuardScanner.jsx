@@ -182,7 +182,7 @@ const GuardScanner = () => {
                       <div className="guard-flex-row" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                         <div style={{ background: 'var(--indigo-soft)', padding: '1.5rem', borderRadius: '16px', flex: 1 }}>
                           <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>EXPECTED DEPARTURE</p>
-                          <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>{new Date(passDetails.departureTime).toLocaleString()}</p>
+                          <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>{new Date(passDetails.departureTime).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })}</p>
                         </div>
                         <div style={{ background: 'var(--indigo-soft)', padding: '1.5rem', borderRadius: '16px', flex: 1 }}>
                           <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>REASON FOR LEAVING</p>
