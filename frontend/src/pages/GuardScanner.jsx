@@ -68,7 +68,7 @@ const GuardScanner = () => {
       </nav>
 
       <div className="container" style={{ paddingTop: '4rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: passDetails || error ? '1fr 1fr' : '1fr', gap: '4rem', alignItems: 'start' }}>
+        <div className="guard-grid">
           
           {/* Scanner & Manual Input */}
           <div style={{ textAlign: 'center' }}>

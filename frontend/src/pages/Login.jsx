@@ -34,22 +34,9 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#fff' }}>
+    <div className="login-container">
       {/* Left Side: Branding & Image */}
-      <div style={{ 
-        flex: 1, 
-        background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.9), rgba(99, 102, 241, 0.8)), url("/hero.png")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundBlendMode: 'overlay',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '4rem',
-        color: 'white',
-        position: 'relative'
-      }}>
+      <div className="branding-section">
         <div style={{ maxWidth: '500px', textAlign: 'center' }}>
           <Building2 size={80} style={{ marginBottom: '2rem' }} />
           <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', lineHeight: 1.1, color: '#fff' }}>Hostel GatePass Portal</h1>
@@ -58,7 +45,7 @@ const Login = () => {
       </div>
 
       {/* Right Side: Form */}
-      <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem', background: 'var(--bg-main)' }}>
+      <div className="form-section">
         <motion.div 
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}

@@ -64,17 +64,17 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-main)' }}>
+    <div className="dashboard-layout">
       {/* Sidebar */}
-      <aside style={{ width: '280px', background: 'white', borderRight: '1px solid var(--border)', padding: '2rem', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '3rem' }}>
+      <aside className="sidebar">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '2.5rem' }}>
           <div style={{ background: 'var(--primary)', color: 'white', padding: '0.5rem', borderRadius: '8px' }}>
             <LayoutDashboard size={20} />
           </div>
           <h2 style={{ fontSize: '1.2rem' }}>Hostel <span style={{ color: 'var(--primary)' }}>Admin</span></h2>
         </div>
 
-        <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <nav className="sidebar-nav">
           <button 
             onClick={() => setActiveTab('pending')} 
             className="btn" 
@@ -121,7 +121,7 @@ const AdminDashboard = () => {
           </button>
         </nav>
 
-        <div style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem' }}>
+        <div className="hide-on-mobile" style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
             <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Users size={20} color="var(--secondary)" />
@@ -138,7 +138,7 @@ const AdminDashboard = () => {
       </aside>
 
       {/* Main Content */}
-      <main style={{ flex: 1, padding: '3rem' }}>
+      <main className="main-content">
         <header style={{ marginBottom: '3rem' }}>
           <h1 style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
             {activeTab === 'pending' ? 'Pending Requests' : 

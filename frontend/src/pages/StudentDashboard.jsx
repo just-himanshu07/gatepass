@@ -110,7 +110,7 @@ const StudentDashboard = () => {
             <h2 style={{ marginBottom: '0.5rem' }}>Gate Pass Request</h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Please verify your details before submitting</p>
 
-            <form onSubmit={handleRequest} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem' }}>
+            <form onSubmit={handleRequest} className="modal-form">
               <div className="input-group">
                 <label className="label">Student Name</label>
                 <input type="text" value={user.name} disabled style={{ background: 'var(--bg-main)' }} />
