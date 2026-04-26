@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 // Routes will be added here
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/passes', require('./routes/pass.routes'));
+app.use('/api/admin', require('./routes/admin.routes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

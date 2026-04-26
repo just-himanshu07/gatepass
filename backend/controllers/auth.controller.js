@@ -13,6 +13,9 @@ exports.register = async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    const userCount = await User.countDocuments();
+    const isFirstAdmin = role === 'admin' && userCount === 0;
+
     const newUser = new User({
       name,
       email,
@@ -22,7 +25,8 @@ exports.register = async (req, res) => {
       phone,
       parentPhone,
       hostel,
-      roomNumber
+      roomNumber,
+      isApproved: role === 'student' || isFirstAdmin
     });
 
     await newUser.save();
@@ -40,6 +44,10 @@ exports.login = async (req, res) => {
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials' });
+
+    if (!user.isApproved) {
+      return res.status(403).json({ message: 'Your account is pending approval by the administrator.' });
+    }
 
     const token = jwt.sign(
       { email: user.email, id: user._id, role: user.role },

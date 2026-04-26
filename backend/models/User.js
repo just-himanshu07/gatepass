@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   parentPhone: { type: String },
   hostel: { type: String },
   roomNumber: { type: String },
+  isApproved: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 });
 

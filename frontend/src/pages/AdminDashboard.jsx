@@ -3,7 +3,8 @@ import API from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import { 
   Check, X, LogOut, LayoutDashboard, ListFilter, Users, 
-  Phone, Inbox, BarChart3, TrendingUp, AlertCircle, CheckCircle2 
+  Phone, Inbox, BarChart3, TrendingUp, AlertCircle, CheckCircle2,
+  ShieldCheck, UserCheck, UserX, Mail, Fingerprint
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -16,10 +17,19 @@ const AdminDashboard = () => {
   useEffect(() => { 
     if (activeTab === 'analytics') {
       fetchStats();
+    } else if (activeTab === 'approvals') {
+      fetchPendingUsers();
     } else {
       fetchRequests(); 
     }
   }, [activeTab]);
+
+  const fetchPendingUsers = async () => {
+    try {
+      const { data } = await API.get('/admin/pending-users');
+      setRequests(data); // Reusing requests state for simplicity or I could use a separate one
+    } catch (err) { console.error(err); }
+  };
 
   const fetchRequests = async () => { 
     try { 
@@ -40,6 +50,17 @@ const AdminDashboard = () => {
       await API.patch(`/passes/${id}/status`, { status }); 
       fetchRequests(); 
     } catch (err) { alert('Failed to update status'); } 
+  };
+
+  const handleUserApproval = async (id, approved) => {
+    try {
+      if (approved) {
+        await API.put(`/admin/approve-user/${id}`);
+      } else {
+        await API.delete(`/admin/reject-user/${id}`);
+      }
+      fetchPendingUsers();
+    } catch (err) { alert('Action failed'); }
   };
 
   return (
@@ -87,6 +108,17 @@ const AdminDashboard = () => {
           >
             <BarChart3 size={18} /> Analytics
           </button>
+          <button 
+            onClick={() => setActiveTab('approvals')} 
+            className="btn" 
+            style={{ 
+              justifyContent: 'flex-start', 
+              background: activeTab === 'approvals' ? 'var(--indigo-soft)' : 'transparent',
+              color: activeTab === 'approvals' ? 'var(--primary)' : 'var(--text-muted)'
+            }}
+          >
+            <ShieldCheck size={18} /> User Approvals
+          </button>
         </nav>
 
         <div style={{ borderTop: '1px solid var(--border)', paddingTop: '2rem' }}>
@@ -109,9 +141,14 @@ const AdminDashboard = () => {
       <main style={{ flex: 1, padding: '3rem' }}>
         <header style={{ marginBottom: '3rem' }}>
           <h1 style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>
-            {activeTab === 'pending' ? 'Pending Requests' : activeTab === 'all' ? 'All Pass History' : 'System Analytics'}
+            {activeTab === 'pending' ? 'Pending Requests' : 
+             activeTab === 'all' ? 'All Pass History' : 
+             activeTab === 'approvals' ? 'Staff Registrations' :
+             'System Analytics'}
           </h1>
-          <p style={{ color: 'var(--text-muted)' }}>Gate activity and statistical overview</p>
+          <p style={{ color: 'var(--text-muted)' }}>
+            {activeTab === 'approvals' ? 'Manage new hostel staff and security registrations' : 'Gate activity and statistical overview'}
+          </p>
         </header>
 
         {activeTab === 'analytics' && stats ? (
@@ -135,6 +172,51 @@ const AdminDashboard = () => {
               <div style={{ background: 'var(--bg-main)', padding: '1rem', borderRadius: '12px', color: 'var(--secondary)' }}><LogOut size={28} /></div>
               <div><p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Already Used</p><h2 style={{ fontSize: '2rem' }}>{stats.used || 0}</h2></div>
             </motion.div>
+          </div>
+        ) : activeTab === 'approvals' ? (
+          <div className="grid">
+            {requests.map((staff) => (
+              <motion.div layout key={staff._id} className="card" style={{ padding: '1.5rem', borderTop: '4px solid var(--primary)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div style={{ background: 'var(--indigo-soft)', padding: '0.8rem', borderRadius: '12px', color: 'var(--primary)' }}>
+                      <Fingerprint size={24} />
+                    </div>
+                    <div>
+                      <h3 style={{ fontSize: '1.2rem', marginBottom: '0.2rem' }}>{staff.name}</h3>
+                      <div className="flex" style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                        <Mail size={12} /> {staff.email}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="badge badge-pending" style={{ textTransform: 'uppercase', height: 'fit-content' }}>
+                    {staff.role}
+                  </div>
+                </div>
+
+                <div style={{ background: 'var(--bg-main)', padding: '1rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div>
+                      <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: '700' }}>PHONE</p>
+                      <p style={{ fontSize: '0.9rem', fontWeight: '600' }}>{staff.phone || 'N/A'}</p>
+                    </div>
+                    <div>
+                      <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: '700' }}>DATE JOINED</p>
+                      <p style={{ fontSize: '0.9rem', fontWeight: '600' }}>{new Date(staff.createdAt).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <button onClick={() => handleUserApproval(staff._id, true)} className="btn btn-primary" style={{ flex: 2, background: 'var(--success)' }}>
+                    <UserCheck size={18} /> Approve Staff
+                  </button>
+                  <button onClick={() => handleUserApproval(staff._id, false)} className="btn btn-outline" style={{ flex: 1, color: 'var(--error)' }}>
+                    <UserX size={18} /> Decline
+                  </button>
+                </div>
+              </motion.div>
+            ))}
           </div>
         ) : (
           <div className="grid">
