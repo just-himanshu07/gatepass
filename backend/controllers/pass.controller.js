@@ -91,6 +91,17 @@ exports.verifyPass = async (req, res) => {
     if (!pass) return res.status(404).json({ message: 'Pass not found' });
 
     if (pass.status === 'approved') {
+      const now = new Date();
+      const departureTime = new Date(pass.departureTime);
+      const diffInMinutes = Math.abs(now - departureTime) / (1000 * 60);
+
+      if (diffInMinutes > 30) {
+        return res.status(400).json({ 
+          message: 'Pass validity error', 
+          error: `This pass is only valid within 30 minutes of the expected departure (${departureTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}).`
+        });
+      }
+
       pass.status = 'used'; // One-time use for exit
       pass.usageDetails.exitGuard = req.userId;
       pass.usageDetails.exitTime = Date.now();
