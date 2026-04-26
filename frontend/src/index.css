@@ -217,11 +217,22 @@ input:focus {
   flex-direction: column;
   gap: 0.5rem;
 }
-
 .main-content {
   flex: 1;
   padding: 3rem;
   width: 100%;
+}
+
+.guard-nav {
+  padding: 1.5rem 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guard-container {
+  padding-top: 4rem;
 }
 
 /* Helpers */
@@ -298,6 +309,23 @@ input:focus {
 
   .main-content {
     padding: 1.5rem !important;
+  }
+
+  .guard-nav {
+    padding: 1rem !important;
+  }
+
+  .guard-container {
+    padding-top: 2rem !important;
+  }
+
+  .guard-card {
+    padding: 1.5rem !important;
+  }
+
+  .guard-flex-row {
+    flex-direction: column !important;
+    gap: 1rem !important;
   }
 
   .grid {

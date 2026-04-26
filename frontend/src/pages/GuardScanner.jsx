@@ -57,7 +57,7 @@ const GuardScanner = () => {
   return (
     <div style={{ background: '#0f172a', minHeight: '100vh', color: 'white' }}>
       {/* Header */}
-      <nav style={{ padding: '1.5rem 2.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <nav className="guard-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Shield size={32} color="#4f46e5" />
           <h1 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#fff' }}>Security Panel <span style={{ color: '#4f46e5' }}>Terminal</span></h1>
@@ -67,7 +67,7 @@ const GuardScanner = () => {
         </button>
       </nav>
 
-      <div className="container" style={{ paddingTop: '4rem' }}>
+      <div className="container guard-container">
         <div className="guard-grid">
           
           {/* Scanner & Manual Input */}
@@ -105,7 +105,7 @@ const GuardScanner = () => {
           {/* Results Display */}
           <AnimatePresence mode="wait">
             {(passDetails || error) && (
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="card" style={{ background: '#fff', color: '#0f172a', padding: '2.5rem' }}>
+              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="card guard-card" style={{ background: '#fff', color: '#0f172a' }}>
                 {error ? (
                   <div style={{ textAlign: 'center' }}>
                     <XCircle size={64} color="var(--error)" style={{ marginBottom: '1.5rem' }} />
@@ -126,7 +126,7 @@ const GuardScanner = () => {
                     </div>
 
                     <div style={{ display: 'grid', gap: '1rem', borderTop: '1px solid var(--border)', paddingTop: '2rem' }}>
-                      <div style={{ display: 'flex', gap: '1rem' }}>
+                      <div className="guard-flex-row" style={{ display: 'flex', gap: '1rem' }}>
                         <div style={{ background: 'var(--bg-main)', padding: '1.5rem', borderRadius: '16px', flex: 1 }}>
                           <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: '700', marginBottom: '0.4rem' }}>STUDENT NAME</p>
                           <p style={{ fontWeight: '800', fontSize: '1.1rem' }}>{passDetails.student?.name}</p>
@@ -137,7 +137,7 @@ const GuardScanner = () => {
                         </div>
                       </div>
 
-                      <div style={{ display: 'flex', gap: '1rem' }}>
+                      <div className="guard-flex-row" style={{ display: 'flex', gap: '1rem' }}>
                         <div className="flex" style={{ background: 'var(--bg-main)', padding: '1rem', borderRadius: '12px', flex: 1, fontSize: '0.9rem' }}>
                           <Home size={16} color="var(--primary)" /> {passDetails.student?.hostel} - {passDetails.student?.roomNumber}
                         </div>
