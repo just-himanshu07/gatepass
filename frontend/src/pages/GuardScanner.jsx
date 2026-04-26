@@ -146,9 +146,20 @@ const GuardScanner = () => {
                         </div>
                       </div>
 
-                      <div style={{ background: 'var(--indigo-soft)', padding: '1.5rem', borderRadius: '16px', marginTop: '1rem' }}>
-                        <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>PARENT CONTACT ({passDetails.relation})</p>
-                        <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>{passDetails.parentPhone}</p>
+                      <div className="guard-flex-row" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                        <div style={{ background: 'var(--indigo-soft)', padding: '1.5rem', borderRadius: '16px', flex: 1 }}>
+                          <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>EXPECTED DEPARTURE</p>
+                          <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>{new Date(passDetails.departureTime).toLocaleString()}</p>
+                        </div>
+                        <div style={{ background: 'var(--indigo-soft)', padding: '1.5rem', borderRadius: '16px', flex: 1 }}>
+                          <p style={{ color: 'var(--primary)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>REASON FOR LEAVING</p>
+                          <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>{passDetails.reason}</p>
+                        </div>
+                      </div>
+
+                      <div style={{ background: 'var(--bg-main)', padding: '1.5rem', borderRadius: '16px', marginTop: '1rem', borderLeft: '4px solid var(--primary)' }}>
+                        <p style={{ color: 'var(--text-muted)', fontWeight: '700', fontSize: '0.8rem', marginBottom: '0.5rem' }}>PARENT CONTACT ({passDetails.relation})</p>
+                        <p style={{ fontSize: '1.1rem', fontWeight: '700' }}><Phone size={14} /> {passDetails.parentPhone}</p>
                       </div>
                     </div>
 
