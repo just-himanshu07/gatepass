@@ -60,10 +60,10 @@ const GuardScanner = () => {
       <nav className="guard-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Shield size={32} color="#4f46e5" />
-          <h1 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#fff' }}>Security Panel <span style={{ color: '#4f46e5' }}>Terminal</span></h1>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#fff' }}>Security Panel <span className="hide-on-mobile" style={{ color: '#4f46e5' }}>Terminal</span></h1>
         </div>
-        <button onClick={logout} className="btn" style={{ background: 'rgba(255,255,255,0.05)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}>
-          <LogOut size={18} /> Exit Console
+        <button onClick={logout} className="btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', background: 'transparent' }}>
+          <LogOut size={18} /><span className="hide-on-mobile">Exit Terminal</span>
         </button>
       </nav>
 
