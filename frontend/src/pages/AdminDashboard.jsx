@@ -74,6 +74,24 @@ const AdminDashboard = () => {
           <h2 style={{ fontSize: '1.2rem' }}>Hostel <span style={{ color: 'var(--primary)' }}>Admin</span></h2>
         </div>
 
+        {/* Mobile Logout (Only visible on small screens) */}
+        <button 
+          onClick={logout} 
+          className="btn-outline hide-on-desktop" 
+          style={{ 
+            position: 'absolute', 
+            top: '1rem', 
+            right: '1rem', 
+            padding: '0.4rem 0.8rem', 
+            borderRadius: '8px',
+            fontSize: '0.8rem',
+            color: 'var(--error)',
+            borderColor: 'rgba(239, 68, 68, 0.2)'
+          }}
+        >
+          <LogOut size={16} /> Logout
+        </button>
+
         <nav className="sidebar-nav">
           <button 
             onClick={() => setActiveTab('pending')} 
