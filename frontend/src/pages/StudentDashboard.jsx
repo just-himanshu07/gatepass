@@ -17,7 +17,23 @@ const StudentDashboard = () => {
 
   useEffect(() => { fetchPasses(); }, []);
   const fetchPasses = async () => { try { const { data } = await API.get('/passes/my'); setPasses(data); } catch (err) { console.error(err); } };
-  const handleRequest = async (e) => { e.preventDefault(); try { await API.post('/passes/request', { reason, departureTime, parentPhone, relation }); setShowModal(false); fetchPasses(); } catch (err) { alert(err.response?.data?.message || 'Request failed'); } };
+  const handleRequest = async (e) => { 
+    e.preventDefault(); 
+    try { 
+      // Convert the local datetime string to a Date object to ensure correct timezone handling
+      const formattedDepartureTime = new Date(departureTime);
+      await API.post('/passes/request', { 
+        reason, 
+        departureTime: formattedDepartureTime, 
+        parentPhone, 
+        relation 
+      }); 
+      setShowModal(false); 
+      fetchPasses(); 
+    } catch (err) { 
+      alert(err.response?.data?.message || 'Request failed'); 
+    } 
+  };
 
   return (
     <div style={{ background: 'var(--bg-main)', minHeight: '100vh' }}>
